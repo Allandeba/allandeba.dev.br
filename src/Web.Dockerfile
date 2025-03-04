@@ -17,6 +17,10 @@ RUN dotnet restore "allandeba.dev.br.Web/allandeba.dev.br.Web.csproj"
 
 COPY ./allandeba.dev.br.Web/ ./allandeba.dev.br.Web/
 COPY ./allandeba.dev.br.Core/ ./allandeba.dev.br.Core/
+# Substitui a url do backend conforme o ambiente através do docker build --build-arg
+ARG ACTUAL_BACKEND_URL
+ARG ENVIRONMENT_BACKEND_URL
+RUN sed -i "s#${ACTUAL_BACKEND_URL}#${ENVIRONMENT_BACKEND_URL}#g" ./allandeba.dev.br.Web/wwwroot/appsettings.json
 RUN dotnet build "allandeba.dev.br.Web/allandeba.dev.br.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

@@ -15,6 +15,7 @@ COPY ./allandeba.dev.br.Api/*.csproj ./allandeba.dev.br.Api/
 COPY ./allandeba.dev.br.Core/*.csproj ./allandeba.dev.br.Core/
 RUN dotnet restore "allandeba.dev.br.Api/allandeba.dev.br.Api.csproj"
 
+RUN chmod -R 740 ./
 COPY ./allandeba.dev.br.Api/ ./allandeba.dev.br.Api/
 COPY ./allandeba.dev.br.Core/ ./allandeba.dev.br.Core/
 RUN dotnet build "allandeba.dev.br.Api/allandeba.dev.br.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
